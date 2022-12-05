@@ -5,26 +5,43 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Auth\AuthoRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function auth(){
-       return view('posts.login');
+    public function auth()
+    {
+        return view('posts.login');
     }
-public function register(){
+
+    public function register()
+    {
         return view('posts.register');
-}
+    }
 
 
-public function login(AuthoRequest $request){
-       $credentials=$request->only('email','password');
-       if (Auth::attempt($credentials)){
-           return redirect()->route('blogs')->with('status','Вы успешно авторизовались');
-       }
-    return view('posts.login')->with('status','Ваши данные не верны');
+    public function login(Request $request){
+        $credentials = $request->only('email', 'password');
+        $user = User::where('email', $credentials['email'])->first();
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                    'message' => 'This email is not registered'
+                ]);
+        }
+        if(Auth::attempt($credentials)){
+            return response()->json([
+                'success'=>true,
+                'token'=>$user->createToken($user->email)->accessToken
+            ]);
+    }
+        return response()->json([
+            'success'=>false,
+            'message'=>'Email or password is invalid'
+        ]);
 }
 
 
