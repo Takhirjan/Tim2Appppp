@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 Route::get('/blogs',[\App\Http\Controllers\API\BlogController::class,'index']);
 Route::delete('/blogs/{id}',[\App\Http\Controllers\API\BlogController::class,'destroy']);

@@ -29,10 +29,10 @@ Route::get('/posts/blog',[PostController::class,'blog'])->name('posts.blog');
 Route::get('/posts/follow',[PostController::class,'follow'])->name('posts.follow');
 Route::resource('posts', PostController::class);
 
-//Route::get('/posts',[PostController::class,'index'])->name('posts.index');
-//Route::get('/posts/create',[PostController::class,'create'])->name('posts.create');
-//Route::post('/posts',[PostController::class,'store'])->name('posts.store');
-//Route::get('posts/{id}',[PostController::class,'show'])->name('posts.show');
+Route::get('/posts',[PostController::class,'index'])->name('posts.index');
+Route::get('/posts/create',[PostController::class,'create'])->name('posts.create');
+Route::post('/posts',[PostController::class,'store'])->name('posts.store');
+Route::get('posts/{id}',[PostController::class,'show'])->name('posts.show');
 /*Route::get('goods', function(Request $req){
  return $req->model;
 });*/

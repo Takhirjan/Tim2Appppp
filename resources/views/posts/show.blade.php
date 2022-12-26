@@ -13,13 +13,25 @@
     <a href="{{route('posts.index')}}">Go to the index Page</a>
 </div>
 <div class="container">
-        <div class="card" style="width:400px">
-            <img class="card-img-top" src="/storage/{{$post->image}}" alt="Card image" style="width:100%">
-            <div class="card-body">
-                <h4 class="card-title">{{$post->title}}</h4>
-                <p class="card-text">{{$post->content}}</p>
-                <a href="{{route('posts.edit',$post->id)}}" class="btn btn-primary">Edit</a>
+    <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-success">MASTER</strong>
+                    <h3 class="mb-0">{{$post->title}}</h3>
+
+                    <p class="mb-auto">{{$post->content}}.</p>
+                    <a href="{{route('posts.edit',$post->id)}}" class="btn btn-primary">Edit</a>
+
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    <img class="bd-placeholder-img" width="250" height="260"
+
+                         src="/storage/{{$post->image}}"
+                         role="img">
+
+                </div>
             </div>
-        </div>
+    </div>
+</div>
 </body>
 </html>
